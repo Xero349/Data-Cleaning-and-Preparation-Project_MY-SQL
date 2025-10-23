@@ -15,3 +15,6 @@ The objectives of this project are the following:
 -Handle null and blank values effectively.
 
 -Drop unnecessary columns and refine data for analysis.
+
+
+Credi: https://irenechola.com/portfolio/mysql-workbench-data-cleaning-and-preparation-project/
