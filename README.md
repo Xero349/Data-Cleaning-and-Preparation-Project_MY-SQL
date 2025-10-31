@@ -17,4 +17,4 @@ The objectives of this project are the following:
 -Drop unnecessary columns and refine data for analysis.
 
 
-Credi: https://irenechola.com/portfolio/mysql-workbench-data-cleaning-and-preparation-project/
+Credit: https://irenechola.com/portfolio/mysql-workbench-data-cleaning-and-preparation-project/
