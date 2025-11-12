@@ -1,3 +1,8 @@
+
+ (NOTE) Read the Screenshots in order by number.
+
+
+
 This project demonstrates how to perform data cleaning using MySQL Workbench and SQL. The focus is on transforming a raw layoffs dataset into a clean, consistent, and analysis-ready format.
 
 
