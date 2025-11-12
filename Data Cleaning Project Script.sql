@@ -1,20 +1,14 @@
--- DATA CLEANING
-
 SELECT * 
 FROM layoffs;
 
--- 1. REMOVE DUPLICATES
--- 2. STANDARDIZE THE DATA
--- 3. NULL VALUES OR BLANK VALUES
--- 4. REMOVE ANY COLUMNS OR ROWS
 
-CREATE TABLE layoff_staging
+CREATE TABLE layoff_source
 LIKE layoffs;
 
 SELECT * 
-FROM layoff_staging;
+FROM layoff_source;
 
-INSERT INTO layoff_staging
+INSERT INTO layoff_source
 SELECT * 
 FROM layoffs;
 
@@ -22,7 +16,7 @@ SELECT *,
 ROW_NUMBER() OVER(
 PARTITION BY company, industry, total_laid_off, 
 percentage_laid_off, `date`) AS row_num
-FROM layoff_staging;
+FROM layoff_source;
 
 WITH duplicate_cte AS 
 (
@@ -30,15 +24,15 @@ WITH duplicate_cte AS
 	ROW_NUMBER() OVER(
 	PARTITION BY company, location, industry, total_laid_off, 
 	stage, country, funds_raised_millions, `date`) AS row_num
-	FROM layoff_staging
+	FROM layoff_source
 )
 SELECT * 
 FROM duplicate_cte
 WHERE row_num > 1;
 
 SELECT *
-FROM layoff_staging
-WHERE company = 'Casper';
+FROM layoff_source
+WHERE company = 'casper';
 
 WITH duplicate_cte AS 
 (
@@ -46,13 +40,13 @@ WITH duplicate_cte AS
 	ROW_NUMBER() OVER(
 	PARTITION BY company, location, industry, total_laid_off, 
 	stage, country, funds_raised_millions, `date`) AS row_num
-	FROM layoff_staging
+	FROM layoff_source
 )
 DELETE 
 FROM duplicate_cte
 WHERE row_num > 1;
 
-CREATE TABLE `layoff_staging2` (
+CREATE TABLE `layoff_source2` (
   `company` TEXT,
   `location` TEXT,
   `industry` TEXT,
@@ -66,100 +60,100 @@ CREATE TABLE `layoff_staging2` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 SELECT *
-FROM layoff_staging2
+FROM layoff_sourceg2
 WHERE row_num > 1;
 
-INSERT INTO layoff_staging2
+INSERT INTO layoff_source2
 SELECT *,
 	ROW_NUMBER() OVER(
 	PARTITION BY company, location, industry, total_laid_off, 
 	stage, country, funds_raised_millions, `date`) AS row_num
-	FROM layoff_staging;
+	FROM layoff_source;
 
 DELETE
-FROM layoff_staging2
+FROM layoff_source2
 WHERE row_num > 1;
 
 SELECT *
-FROM layoff_staging2;
+FROM layoff_source2;
 
--- STANDARDIZING THE DATA
+
 
 SELECT company, TRIM(company)
-FROM layoff_staging2;
+FROM layoff_source2;
 
-UPDATE layoff_staging2
+UPDATE layoff_source2
 SET company = TRIM(company);
 
 SELECT DISTINCT industry
-FROM layoff_staging2
+FROM layoff_source2
 ORDER BY 1;
 
 SELECT DISTINCT *
-FROM layoff_staging2
+FROM layoff_source2
 WHERE industry LIKE 'Crypto%';
 
 SELECT DISTINCT industry
-FROM layoff_staging2;
+FROM layoff_source2;
 
-UPDATE layoff_staging2
+UPDATE layoff_source2
 SET industry = 'Crypto'
 WHERE industry LIKE 'Crypto%';
 
 SELECT DISTINCT country, TRIM(TRAILING '.' FROM country)
-FROM layoff_staging2
+FROM layoff_source2
 ORDER BY 1;
 
-UPDATE layoff_staging2
+UPDATE layoff_source2
 SET country = TRIM(TRAILING '.' FROM country)
 WHERE country LIKE 'United States%';
 
 SELECT `date`
-FROM layoff_staging2;
+FROM layoff_source2;
 
-UPDATE layoff_staging2
+UPDATE layoff_soucre2
 SET `date` = STR_TO_DATE(`date`, '%m/%d/%Y');
 
 ALTER TABLE layoff_staging2
 MODIFY COLUMN `date` DATE;
 
 SELECT *
-FROM layoff_staging2
+FROM layoff_source2
 WHERE total_laid_off IS NULL
 AND percentage_laid_off IS NULL;
 
-UPDATE layoff_staging2
+UPDATE layoff_source2
 SET industry = NULL
 WHERE industry = '';
 
 SELECT *
-FROM layoff_staging2
+FROM layoff_source2
 WHERE industry IS NULL 
 OR industry = '';
 
 SELECT *
-FROM layoff_staging2
+FROM layoff_source2
 WHERE company LIKE 'Bally%';
 
 SELECT t1.industry, t2.industry
-FROM layoff_staging2 t1
-JOIN layoff_staging2 t2
+FROM layoff_source2 t1
+JOIN layoff_source2 t2
 	ON t1.company = t2.company
 WHERE (t1.industry IS NULL OR t1.industry = '')
 AND t2.industry IS NOT NULL;
 
-UPDATE layoff_staging2 t1
-JOIN layoff_staging2 t2
+UPDATE layoff_source2 t1
+JOIN layoff_source2 t2
 	ON t1.company = t2.company
 SET t1.industry = t2.industry
 WHERE t1.industry IS NULL
 AND t2.industry IS NOT NULL;
 
 SELECT *
-FROM layoff_staging2;
+FROM layoff_source2;
 
 SELECT *
-FROM layoff_staging2
+FROM layoff_source2
 WHERE total_laid_off IS NULL
 AND percentage_laid_off IS NULL;
 
@@ -169,9 +163,9 @@ WHERE total_laid_off IS NULL
 AND percentage_laid_off IS NULL;
 
 SELECT * 
-FROM layoff_staging2;
+FROM layoff_source2;
 
-ALTER TABLE layoff_staging2
+ALTER TABLE layoff_source2
 DROP COLUMN row_num;
 
 
