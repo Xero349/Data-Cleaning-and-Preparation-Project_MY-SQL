@@ -1,12 +1,13 @@
 
- (NOTE) Read the Screenshots in order by number.
+# NOTE: 
+ Read the Screenshots in order by number.
 
 
 
 This project demonstrates how to perform data cleaning using MySQL Workbench and SQL. The focus is on transforming a raw layoffs dataset into a clean, consistent, and analysis-ready format.
 
 
-The objectives of this project are the following:
+# The objectives of this project are the following:
 
 
 -Import raw data into a staging table for safe transformation.
@@ -22,7 +23,7 @@ The objectives of this project are the following:
 -Drop unnecessary columns and refine data for analysis.
 
 
-Steps:
+# Steps:
 
 1. Create a new database
 2. Import the dataset
@@ -44,4 +45,5 @@ Steps:
 
 
 
-Credit: https://irenechola.com/portfolio/mysql-workbench-data-cleaning-and-preparation-project/
+# Credit: 
+https://irenechola.com/portfolio/mysql-workbench-data-cleaning-and-preparation-project/
