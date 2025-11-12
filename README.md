@@ -11,17 +11,17 @@
 # The objectives of this project are the following:
 
 
--Import raw data into a staging table for safe transformation.
+- Import raw data into a staging table for safe transformation.
 
--Identify and remove duplicate records 
+- Identify and remove duplicate records 
 
--Standardize inconsistent data entries 
+- Standardize inconsistent data entries 
 
--Convert string-based dates into proper date formats.
+- Convert string-based dates into proper date formats.
 
--Handle null and blank values effectively.
+- Handle null and blank values effectively.
 
--Drop unnecessary columns and refine data for analysis.
+- Drop unnecessary columns and refine data for analysis.
 
 
 # Steps:
