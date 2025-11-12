@@ -1,10 +1,11 @@
 
-# NOTE: 
+# Note: 
  Read the Screenshots in order by number.
 
 
+# Purpose:
 
-This project demonstrates how to perform data cleaning using MySQL Workbench and SQL. The focus is on transforming a raw layoffs dataset into a clean, consistent, and analysis-ready format.
+- This project demonstrates how to perform data cleaning using MySQL Workbench and SQL. The focus is on transforming a raw layoffs dataset into a clean, consistent, and analysis-ready format.
 
 
 # The objectives of this project are the following:
