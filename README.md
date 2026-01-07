@@ -26,7 +26,7 @@
 
 # Steps:
 
-1. Create a new database (Screenshots/Screenshot 1.png)
+1. Create a new database (https://github.com/Xero349/Data-Cleaning-and-Preparation-Project_MY-SQL/blob/main/Screenshots/Screenshot%201.png)
 2. Import the dataset
 3. View imported table
 4. Create a duplicate table to work on'
