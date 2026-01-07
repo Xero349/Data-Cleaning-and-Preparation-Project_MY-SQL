@@ -26,7 +26,7 @@
 
 # Steps:
 
-1. Create a new database
+1. Create a new database (Screenshots/Screenshot 1.png)
 2. Import the dataset
 3. View imported table
 4. Create a duplicate table to work on'
